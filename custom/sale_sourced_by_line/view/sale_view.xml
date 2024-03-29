@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_warehouse_wizard" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='price_subtotal']"
+                position="after"
+            >
+                <button string="Warehouse Qty"
+                            type="object" name="action_create_so_line_warehouse" attrs="{'invisible': [('create_date','!=',False)]}"/>          
+            </xpath>
+        </field>
+    </record>
+    <record id="view_order_form_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='route_id']"
+                position="before"
+            >
+                <field name="warehouse_id" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute
+                    name="context"
+                >{'default_warehouse_id': warehouse_id}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Warehouse line -->
+
+
+    <record id="stock_warehouse_line" model="ir.ui.view">
+        <field name="name">stock.warehouse.line</field>
+        <field name="model">stock.warehouse.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="order_line_id" invisible="1"/>
+                    <field name="warehouse_id"/>
+                    <field name="qty_delivered"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_warehouse_line_list_view" model="ir.ui.view">
+        <field name="name">stock.warehouse.line.list.view</field>
+        <field name="model">stock.warehouse.line</field>
+        <field name="arch" type="xml">
+            <tree  editable="top" >
+                <field name="order_line_id"/>
+                <field name="warehouse_id"/>
+                <field name="qty_delivered"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_warehouse_line" model="ir.actions.act_window">
+        <field name="name">stock.warehouse.line</field>
+        <field name="res_model">stock.warehouse.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="stock_warehouse_line_list_view"/>
+    </record>
+
+    <menuitem
+            name="DDT"
+            parent="sale.menu_sales_config"
+            action="action_stock_warehouse_line"
+            id="menu_action_ddt_account"
+            sequence="15"/>
+
+</odoo>
