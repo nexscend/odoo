@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+        <record id="module_inventory_nex" model="ir.module.category">
+            <field name="name">Inventory</field>
+            <field name="sequence">17</field>
+        </record>
+        <record id="inventory_nex_group_user" model="res.groups">
+            <field name="name">Sales user</field>
+            <field name="category_id" ref="module_inventory_nex"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        <record id="inventory_nex_group_manager" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="implied_ids" eval="[(4, ref('inventory_nex_group_user'))]"/>
+            <field name="category_id" ref="module_inventory_nex"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+</odoo>

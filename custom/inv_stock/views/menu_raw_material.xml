@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+     <menuitem id="menu_raw_material"
+              name="Raw Material"
+              parent="purchase.menu_product_in_config_purchase"
+              action="nex_product_cate_raw_material.Product_category_raw_material_action"
+              sequence="10"
+              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+
+    
+</odoo>

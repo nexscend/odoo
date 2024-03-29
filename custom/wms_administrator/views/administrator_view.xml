@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <menuitem id="administrator"
+              name="Administrator"
+              sequence="10"
+              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+
+       
+     <menuitem id="menu_administrator_products"
+              name="Products"
+              parent="wms_administrator.administrator"
+              sequence="1"
+              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+
+     <menuitem id="menu_admin_raw_material"
+              name="Raw Material"
+              parent="wms_administrator.menu_administrator_products"
+              action="nex_product_cate_raw_material.Product_category_raw_material_action"
+              sequence="10"
+              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+
+
+     <menuitem id="menu_dimensions"
+              name="Dimensions"
+              parent="wms_administrator.menu_administrator_products"
+              action="product_dimension.Product_category_dimensionl_action"
+              sequence="20"
+              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</odoo>
