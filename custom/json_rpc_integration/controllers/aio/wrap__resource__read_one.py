@@ -1,8 +1,6 @@
 from .utils import get_fields_values_from_model
 from .response import error_response,success_response
 def wrap__resource__read_one(modelname, id: int, OUT_fields, pre_schema=True, exclude_fields=None,):
-    print("____wrap__resource__read_one___-")
-    print("___OUT_fields____-",OUT_fields)
     if exclude_fields:
         if type(exclude_fields) == str:
             exclude_fields = (exclude_fields,)
