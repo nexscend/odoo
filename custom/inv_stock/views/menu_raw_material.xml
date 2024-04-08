@@ -1,12 +1,358 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
        
-     <menuitem id="menu_raw_material"
-              name="Raw Material"
-              parent="purchase.menu_product_in_config_purchase"
-              action="nex_product_cate_raw_material.Product_category_raw_material_action"
-              sequence="10"
-              groups="nex_product_cate_raw_material.inventory_nex_group_manager"/>
+     <record id="product_template_view_bags" model="ir.ui.view">
+        <field name="name">product.template.product.form.inherit.sale</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                   <field name="is_paper_bag" invisible="1"/>
+                      <field name="is_tshirt_bag" invisible="1"/>
+                      <field name="is_go_green_bag" invisible="1"/>
+                      <field name="is_garbage_bag" invisible="1"/>
+                      <field name="is_ice_bag" invisible="1"/>
+                      <field name="is_produce_bag" invisible="1"/>
+                      <field name="is_reuse_bag" invisible="1"/>
+                      <field name="is_wrap_bag" invisible="1"/>
+                      <field name="is_zipper_bag" invisible="1"/>
+                      <field name="mil"/>
+                      <field name="zipper_type"/>
+                </xpath>
+               <xpath expr="//notebook" position="inside">
+                    <page string="Tshirt Bags Specification" invisible="is_tshirt_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                    <page string="Paper Bags Specification" invisible="is_paper_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                     <page string="Go Green Bags Specification" invisible="is_go_green_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                    <page string="Garbage Bags Specification" invisible="is_garbage_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                    <page string="Ice Bags Bags" invisible="is_ice_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Produce Bags Bags" invisible="is_produce_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Reuse Bags Bags" invisible="is_reuse_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Stretch Wrap - Pallet Wrap Bags" invisible="is_wrap_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Zipper Bags Bags" invisible="is_zipper_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>  
+               </xpath>
+         </field>
+     </record>
+
+     <record id="product_product_view_bags" model="ir.ui.view">
+        <field name="name">product.product.form.inherit.sale</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="after">
+                   <field name="is_paper_bag" invisible="1"/>
+                      <field name="is_tshirt_bag" invisible="1"/>
+                      <field name="is_go_green_bag" invisible="1"/>
+                      <field name="is_garbage_bag" invisible="1"/>
+                      <field name="is_ice_bag" invisible="1"/>
+                      <field name="is_produce_bag" invisible="1"/>
+                      <field name="is_reuse_bag" invisible="1"/>
+                      <field name="is_wrap_bag" invisible="1"/>
+                      <field name="is_zipper_bag" invisible="1"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Tshirt Bags Specification" invisible="is_tshirt_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                    <page string="Paper Bags Specification" invisible="is_paper_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page> 
+                     <page string="Go Green Bags Specification" invisible="is_go_green_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page> 
+                     <page string="Garbage Bags Specification" invisible="is_garbage_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>
+                    <page string="Ice Bags Bags" invisible="is_ice_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Produce Bags Bags" invisible="is_produce_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Reuse Bags Bags" invisible="is_reuse_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Stretch Wrap - Pallet Wrap Bags" invisible="is_wrap_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>                    
+                    <page string="Zipper Bags Bags" invisible="is_zipper_bag == False">
+                         <group>
+                              <group>
+                                  <field name="stock_number"/>
+                                  <field name="case_count"/>
+                                  <field name="case_length"/>
+                                  <field name="case_height"/>
+                                  <field name="case_width"/>
+                              </group>
+                              <group>
+                                  <field name="case_cube"/>
+                                  <field name="case_weight"/>
+                                  <field name="case_pack"/>
+                                  <field name="upc"/>
+                              </group>
+                         </group>
+                    </page>  
+               </xpath>
+
+              
+         </field>
+     </record>
+
 
     
 </odoo>

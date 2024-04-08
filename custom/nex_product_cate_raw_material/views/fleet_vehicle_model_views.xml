@@ -10,7 +10,8 @@
                 <group name="last" col="2">
                     <field name="parent_id" invisible="1"/>
                     <!-- <field name="raw_material_id" class="oe_inline" required="True"  invisible="parent_id != 0"/> -->
-                    <field name="raw_material_id" class="oe_inline" required="True"  invisible="parent_id == 0"/>
+                    <field name="raw_material_id" class="oe_inline" required="True"  invisible="parent_id == 0"  options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}" widget="selection"/>
+                    <field name="price" class="oe_inline" readonly="1"  invisible="parent_id == 0"/>
                 </group>
             </xpath>
         </field>
@@ -51,7 +52,7 @@
     </record>
 
     <record id="Product_category_raw_material_action" model="ir.actions.act_window">
-        <field name="name">Product Category Raw Material</field>
+        <field name="name">Raw Material</field>
         <field name="res_model">product.category.raw.material</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id"></field>
@@ -61,7 +62,7 @@
               No data for analysis
             </p>
             <p>
-              Manage efficiently your different Product Category Raw Material Price with Odoo.
+              Manage efficiently your different Raw Material Price with Odoo.
             </p>
         </field>
     </record>

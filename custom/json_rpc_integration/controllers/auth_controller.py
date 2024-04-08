@@ -100,6 +100,79 @@ class AuthController(http.Controller):
         }
 
 
+
+    @http.route('/api/authenticate', type='json', auth='public', methods=['POST'], csrf=False)
+    def api_authenticate(self, **post):
+
+        db = post.get('db')
+        username = post.get('username')
+        password = post.get('password')
+
+        # Authenticate user using username and password
+        user_ref = request.env['res.users']
+        uid = request.env['res.users']._login(db, username, password, user_agent_env = request.env)
+        user = user_ref.sudo().browse(uid)
+        print("_____user",user)
+        partner = user.partner_id
+        if user:
+            current_date = datetime.utcnow().utctimetuple()
+            exp = datetime.now().utcnow().replace(day=datetime.now().utcnow().day+1).utctimetuple()
+            if user:
+                auth_id = request.env['auth.jwt.validator'].sudo().search([('name','ilike', 'Admin')], limit=1)
+                if not auth_id:
+                    raise ValidationError(_('JWT Validator: Not Found of AUTH JWT validator'))
+                currentTimestamp =  timegm(current_date)
+                expTimestamp =   timegm(exp)
+                now = timegm(datetime.utcnow().utctimetuple())
+                payload_data = {
+                    "user": user.name,
+                    'iat': currentTimestamp,
+                    'exp':  expTimestamp,
+                    "issuer" : auth_id.issuer,
+                    "audience" : auth_id.audience
+                    }
+                token = jwt.encode(
+                    payload = payload_data,
+                    key = user.name,
+                    )
+                auth_id.write({
+                    "signature_type" : 'secret',
+                    "secret_key" : token
+                    })
+            return {
+                "message": "Login Success.",
+                "data": {
+                    "user": {
+                        "login":user.login,
+                        "id": user.id,
+                        "name": user.name,
+                        "token": token,
+                        'iat': currentTimestamp,
+                        "issuer" : auth_id.issuer,
+                        "exp_time" : expTimestamp,
+                        "audience" : auth_id.audience
+                    },
+                    "partner": {
+                        "id": partner.id,
+                        "name": partner.name
+                    }
+                }
+            }
+        else:
+            return "Invalid credentials"
+
+        # user = request.env['res.users'].sudo().search([('login', '=', username)])
+        # if user and user.sudo().check_password(password):
+        #     # Generate JWT token
+        #     payload = {
+        #         'user_id': user.id,
+        #         'username': user.login
+        #     }
+        #     token = jwt.encode(payload, 'secret_key', algorithm='HS256')
+
+        #     return token
+
+
     # @http.route('/api/auth/generate_token', type="json", auth="none", csrf=False, cors="*")
     # def api_auth_generate_token(self, login: str, password: str, **kwargs):
     #     payload = {

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+     <record id="product_category_view_bags" model="ir.ui.view">
+        <field name="name">product.category.form.inherit.sale</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+               <xpath expr="//group[@name='first']" position="after">
+                    <group name="category_type">
+                        <group string="Product Type">
+                             <field name="is_paper_bag" optional="show"/>
+                              <field name="is_tshirt_bag" optional="show"/>
+                              <field name="is_go_green_bag" optional="show"/>
+                              <field name="is_garbage_bag" optional="show"/>
+                              <field name="is_ice_bag" optional="show"/>
+                              <field name="is_produce_bag" optional="show"/>
+                              <field name="is_reuse_bag" optional="show"/>
+                              <field name="is_wrap_bag" optional="show"/>
+                              <field name="is_zipper_bag" optional="show"/>
+                        </group>
+                    </group>
+                </xpath>
+         </field>
+     </record>
+
+    
+</odoo>

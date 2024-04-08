@@ -17,11 +17,48 @@ class ProductDimension(models.Model):
     product_width = fields.Float("Width")
     category_id = fields.Many2one('product.category', 'Category')
     product_id = fields.Many2one('product.product', 'Product')
+    product_temp_id = fields.Many2one('product.template', 'Product')
 
-    @api.onchange('product_id')
+    @api.onchange('product_temp_id')
     def _onchange_product_id(self):
-        if self.product_id:
-            self.category_id = self.product_id.categ_id.id
+        if self.product_temp_id:
+            self.category_id = self.product_temp_id.categ_id.id
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Insert model_name and model_model field values upon creation."""
+        res = super(ProductDimension, self).create(vals_list)
+        attribute_id = self.env['product.attribute'].search([('name', 'ilike', 'Bag Dimension')])
+        record_val = {
+                    'name' : ('%s x %s x %s'%(int(res.product_length),int(res.product_height),int(res.product_width))),
+                    'attribute_id': attribute_id.id,
+                    'dimension_id': res.id,
+                    }
+        product_attribute_value_id = self.env["product.attribute.value"].create(record_val)
+
+        line_id = res.product_temp_id.attribute_line_ids.filtered(lambda line: line.attribute_id.id == attribute_id.id)
+        if line_id:
+            line_id.write({'value_ids':  [(6, 0, line_id.value_ids.ids + [product_attribute_value_id.id])]})
+        else:
+            self.env['product.template.attribute.line'].create({
+                'product_tmpl_id' : res.product_temp_id.id,
+                'attribute_id' : attribute_id.id,
+                'value_ids' : [(6, 0, [product_attribute_value_id.id])],
+                })
+        return res
+
+
+    def write(self, vals):
+        dimension = super(ProductDimension, self).write(vals)
+        attribute_id = self.env['product.attribute.value'].search([('dimension_id', '=', self.id)])
+        if attribute_id:
+            attribute_id.write({'name': ('%s x %s x %s'%(int(self.product_length),int(self.product_height),int(self.product_width)))})
+        return dimension
+
+class ProductAttributeValue(models.Model):
+    _inherit = "product.attribute.value"
+
+    dimension_id = fields.Many2one('product.dimension', 'Dimension')
 
 
 class ProductCategory(models.Model):

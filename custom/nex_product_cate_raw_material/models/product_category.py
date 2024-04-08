@@ -10,7 +10,7 @@ class ProductCategoryRawMaterial(models.Model):
     _order = "create_date desc"
 
     name = fields.Char(string="Name")
-    price = fields.Float(string='Raw Material Cost', tracking=True)
+    price = fields.Float(string='Raw Material Cost')
 
 
 class Product_Category(models.Model):
@@ -19,5 +19,6 @@ class Product_Category(models.Model):
     raw_material_id = fields.Many2one(
         'product.category.raw.material', 'Raw Material',
     )
+    price = fields.Float(string='Raw Material Price', related="raw_material_id.price")
 
     
