@@ -41,7 +41,7 @@
                     </group>
                     <notebook>
                         <page string="Groups">
-                            <field name="implied_ids" nolabel="1" />
+                            <field name="implied_ids" nolabel="1" domain="[('id', 'not in', [group_id, False])]" />
                         </page>
                         <page string="Users">
                             <field name="line_ids" nolabel="1">

@@ -7,8 +7,8 @@
         <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
                 <xpath expr="//field[@name='categ_id']" position="after">
-                   <field name="is_paper_bag" invisible="1"/>
-                      <field name="is_tshirt_bag" invisible="1"/>
+                    <field name="is_paper_bag" invisible="1"/>
+                       <field name="is_tshirt_bag" invisible="1"/>
                       <field name="is_go_green_bag" invisible="1"/>
                       <field name="is_garbage_bag" invisible="1"/>
                       <field name="is_ice_bag" invisible="1"/>
@@ -20,7 +20,7 @@
                       <field name="zipper_type"/>
                 </xpath>
                <xpath expr="//notebook" position="inside">
-                    <page string="Tshirt Bags Specification" invisible="is_tshirt_bag == False">
+                     <page string="Tshirt Bags Specification" invisible="is_tshirt_bag == False">
                          <group>
                               <group>
                                   <field name="stock_number"/>
@@ -37,6 +37,7 @@
                               </group>
                          </group>
                     </page>
+                     <!-- <page string="Paper Bags Specification" > -->
                     <page string="Paper Bags Specification" invisible="is_paper_bag == False">
                          <group>
                               <group>
@@ -54,7 +55,7 @@
                               </group>
                          </group>
                     </page>
-                     <page string="Go Green Bags Specification" invisible="is_go_green_bag == False">
+                      <page string="Go Green Bags Specification" invisible="is_go_green_bag == False">
                          <group>
                               <group>
                                   <field name="stock_number"/>
@@ -183,17 +184,17 @@
         <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
                 <xpath expr="//field[@name='categ_id']" position="after">
-                   <field name="is_paper_bag" invisible="1"/>
-                      <field name="is_tshirt_bag" invisible="1"/>
-                      <field name="is_go_green_bag" invisible="1"/>
-                      <field name="is_garbage_bag" invisible="1"/>
-                      <field name="is_ice_bag" invisible="1"/>
-                      <field name="is_produce_bag" invisible="1"/>
-                      <field name="is_reuse_bag" invisible="1"/>
-                      <field name="is_wrap_bag" invisible="1"/>
-                      <field name="is_zipper_bag" invisible="1"/>
+                    <field name="is_paper_bag" invisible="1"/>
+                       <field name="is_tshirt_bag" invisible="1"/>
+                       <field name="is_go_green_bag" invisible="1"/>
+                       <field name="is_garbage_bag" invisible="1"/>
+                       <field name="is_ice_bag" invisible="1"/>
+                       <field name="is_produce_bag" invisible="1"/>
+                       <field name="is_reuse_bag" invisible="1"/>
+                       <field name="is_wrap_bag" invisible="1"/>
+                       <field name="is_zipper_bag" invisible="1"/>
                 </xpath>
-                <xpath expr="//notebook" position="inside">
+                 <xpath expr="//notebook" position="inside">
                     <page string="Tshirt Bags Specification" invisible="is_tshirt_bag == False">
                          <group>
                               <group>
@@ -211,7 +212,7 @@
                               </group>
                          </group>
                     </page>
-                    <page string="Paper Bags Specification" invisible="is_paper_bag == False">
+                    <page string="Paper Bags Specification">
                          <group>
                               <group>
                                   <field name="stock_number"/>
@@ -347,7 +348,7 @@
                               </group>
                          </group>
                     </page>  
-               </xpath>
+                </xpath>
 
               
          </field>

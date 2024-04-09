@@ -28,6 +28,9 @@ Inventory, warehouse, sale, purchase
         'nex_product_cate_raw_material',
     ],
     'data': [
+        'data/ir_attachment.xml',
+        'views/product_template.xml',
+        'views/product_category.xml',
         'views/menu_raw_material.xml',
     ],
 
