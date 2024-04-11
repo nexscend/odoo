@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="web.image_placeholder" model="ir.attachment">
+            <field name="name">placeholder.png</field>
+            <field name="type">url</field>
+            <field name="url">/inv_stock/static/img/coming_soon.jpg</field>
+            <field name="public">True</field>
+        </record>
+    </data>
+</odoo>

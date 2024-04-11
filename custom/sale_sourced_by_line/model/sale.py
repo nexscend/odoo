@@ -7,6 +7,7 @@
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
 from odoo.osv import expression
+_logger = logging.getLogger(__name__)
 
 
 
@@ -24,7 +25,6 @@ class StockWarehouse(models.Model):
        # code
         domain = []
         warehouse_data = []
-        print("_ if 'only_product_related_warehouse_show' in self.env.context:") 
         if 'only_product_related_warehouse_show' in self.env.context:
             order_line_id = self.env.context.get('only_product_related_warehouse_show')
             product_id = self.env['sale.order.line'].browse(order_line_id).product_id
@@ -131,7 +131,7 @@ class SaleOrderLineWizard(models.Model):
 
 
     def change_product_qty(self):
-        print("_____data")
+        _logger.info("Update Details...")
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
